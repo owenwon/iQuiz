@@ -43,6 +43,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="E7U-xR-Jfg" kind="show" identifier="toQuestionSegue" id="D0k-pT-GDO"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -74,6 +77,94 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1066.4122137404579" y="130.98591549295776"/>
+        </scene>
+        <!--Question View Controller-->
+        <scene sceneID="9nP-eR-Sc5">
+            <objects>
+                <viewController id="E7U-xR-Jfg" customClass="QuestionViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fh0-RS-Z06">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="questionLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBN-9W-6jh">
+                                <rect key="frame" x="46.666666666666657" y="222" width="300" height="20.333333333333343"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="jvT-7f-eWI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pIm-YI-JMj">
+                                <rect key="frame" x="167" y="336" width="59" height="180"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hk9-n9-c7I">
+                                        <rect key="frame" x="0.0" y="0.0" width="59" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="answer1"/>
+                                        <connections>
+                                            <action selector="answerTapped:" destination="E7U-xR-Jfg" eventType="touchUpInside" id="7uT-Wh-LuY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyz-ib-GVv">
+                                        <rect key="frame" x="0.0" y="50" width="59" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="answer2"/>
+                                        <connections>
+                                            <action selector="answerTapped:" destination="E7U-xR-Jfg" eventType="touchUpInside" id="wfl-Ig-XxA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2z-AC-9Y1">
+                                        <rect key="frame" x="0.0" y="100" width="59" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="answer3"/>
+                                        <connections>
+                                            <action selector="answerTapped:" destination="E7U-xR-Jfg" eventType="touchUpInside" id="txt-LR-5er"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ViJ-ne-xpO">
+                                        <rect key="frame" x="0.0" y="150" width="59" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="answer4"/>
+                                        <connections>
+                                            <action selector="answerTapped:" destination="E7U-xR-Jfg" eventType="touchUpInside" id="1kG-qC-FCI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dX-Oc-xDD">
+                                <rect key="frame" x="295" y="729.66666666666663" width="78" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Submit"/>
+                                <connections>
+                                    <action selector="submitTapped:" destination="E7U-xR-Jfg" eventType="touchUpInside" id="sft-PU-Kfs"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wGP-RO-jTi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pIm-YI-JMj" firstAttribute="centerX" secondItem="fh0-RS-Z06" secondAttribute="centerX" id="6FL-VO-7Lg"/>
+                            <constraint firstItem="QBN-9W-6jh" firstAttribute="top" secondItem="wGP-RO-jTi" secondAttribute="top" constant="50" id="8jd-Jc-bVE"/>
+                            <constraint firstItem="pIm-YI-JMj" firstAttribute="centerY" secondItem="fh0-RS-Z06" secondAttribute="centerY" id="U8T-uc-DQO"/>
+                            <constraint firstItem="wGP-RO-jTi" firstAttribute="bottom" secondItem="9dX-Oc-xDD" secondAttribute="bottom" constant="20" id="YWC-yR-wx9"/>
+                            <constraint firstItem="9dX-Oc-xDD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wGP-RO-jTi" secondAttribute="leading" symbolic="YES" id="dmZ-DY-6mW"/>
+                            <constraint firstItem="QBN-9W-6jh" firstAttribute="centerX" secondItem="fh0-RS-Z06" secondAttribute="centerX" id="q12-Eb-VH7"/>
+                            <constraint firstItem="wGP-RO-jTi" firstAttribute="trailing" secondItem="9dX-Oc-xDD" secondAttribute="trailing" constant="20" id="qLf-KH-jra"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="TIZ-0p-GUB"/>
+                    <connections>
+                        <outlet property="answer1" destination="Hk9-n9-c7I" id="AOC-pd-Wf6"/>
+                        <outlet property="answer2" destination="iyz-ib-GVv" id="dQg-Gk-017"/>
+                        <outlet property="answer3" destination="q2z-AC-9Y1" id="ijx-VQ-zCr"/>
+                        <outlet property="answer4" destination="ViJ-ne-xpO" id="bg1-MV-6WH"/>
+                        <outlet property="questionLabel" destination="QBN-9W-6jh" id="eRT-vP-gCQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QEW-P5-iLT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1926" y="137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3qq-6j-Bau">
