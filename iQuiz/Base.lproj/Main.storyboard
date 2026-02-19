@@ -160,11 +160,64 @@
                         <outlet property="answer3" destination="q2z-AC-9Y1" id="ijx-VQ-zCr"/>
                         <outlet property="answer4" destination="ViJ-ne-xpO" id="bg1-MV-6WH"/>
                         <outlet property="questionLabel" destination="QBN-9W-6jh" id="eRT-vP-gCQ"/>
+                        <segue destination="Ruo-R3-BbJ" kind="show" id="6Cd-j2-vFG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEW-P5-iLT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="137"/>
+            <point key="canvasLocation" x="1909" y="131"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="jb9-yt-75d">
+            <objects>
+                <viewController id="Ruo-R3-BbJ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lrl-Kx-fmK">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QuestionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrZ-Ed-zRa">
+                                <rect key="frame" x="141.66666666666666" y="222" width="110" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CorrectAnswer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBw-Qv-6Hu">
+                                <rect key="frame" x="139" y="343" width="115" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cf8-eu-C28">
+                                <rect key="frame" x="172.66666666666666" y="464" width="48" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgz-zi-OIy">
+                                <rect key="frame" x="298" y="729" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tyu-7H-fmh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hrZ-Ed-zRa" firstAttribute="centerX" secondItem="lrl-Kx-fmK" secondAttribute="centerX" id="0bM-PM-d3n"/>
+                            <constraint firstItem="tyu-7H-fmh" firstAttribute="trailing" secondItem="vgz-zi-OIy" secondAttribute="trailing" constant="20" id="4yL-NP-9c7"/>
+                            <constraint firstItem="cf8-eu-C28" firstAttribute="centerX" secondItem="lrl-Kx-fmK" secondAttribute="centerX" id="Erp-Kt-cbl"/>
+                            <constraint firstItem="RBw-Qv-6Hu" firstAttribute="centerX" secondItem="lrl-Kx-fmK" secondAttribute="centerX" id="HRA-2G-Zyr"/>
+                            <constraint firstItem="hrZ-Ed-zRa" firstAttribute="top" secondItem="tyu-7H-fmh" secondAttribute="top" constant="50" id="Huo-2h-CN0"/>
+                            <constraint firstItem="cf8-eu-C28" firstAttribute="top" secondItem="RBw-Qv-6Hu" secondAttribute="bottom" constant="100" id="gHZ-pA-YfQ"/>
+                            <constraint firstItem="RBw-Qv-6Hu" firstAttribute="top" secondItem="hrZ-Ed-zRa" secondAttribute="bottom" constant="100" id="r0X-xG-50z"/>
+                            <constraint firstItem="vgz-zi-OIy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tyu-7H-fmh" secondAttribute="leading" symbolic="YES" id="u8j-zd-7u6"/>
+                            <constraint firstItem="tyu-7H-fmh" firstAttribute="bottom" secondItem="vgz-zi-OIy" secondAttribute="bottom" constant="20" id="ykw-mO-z6k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NJu-yP-bg4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J50-Xm-hbj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2785" y="131"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3qq-6j-Bau">
