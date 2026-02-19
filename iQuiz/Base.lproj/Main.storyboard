@@ -160,17 +160,17 @@
                         <outlet property="answer3" destination="q2z-AC-9Y1" id="ijx-VQ-zCr"/>
                         <outlet property="answer4" destination="ViJ-ne-xpO" id="bg1-MV-6WH"/>
                         <outlet property="questionLabel" destination="QBN-9W-6jh" id="eRT-vP-gCQ"/>
-                        <segue destination="Ruo-R3-BbJ" kind="show" id="6Cd-j2-vFG"/>
+                        <segue destination="Ruo-R3-BbJ" kind="show" identifier="toAnswerSegue" id="6Cd-j2-vFG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEW-P5-iLT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1909" y="131"/>
         </scene>
-        <!--View Controller-->
+        <!--Answer View Controller-->
         <scene sceneID="jb9-yt-75d">
             <objects>
-                <viewController id="Ruo-R3-BbJ" sceneMemberID="viewController">
+                <viewController id="Ruo-R3-BbJ" customClass="AnswerViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lrl-Kx-fmK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,9 +194,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgz-zi-OIy">
-                                <rect key="frame" x="298" y="729" width="75" height="35"/>
+                                <rect key="frame" x="313.33333333333331" y="729" width="59.666666666666686" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Next"/>
+                                <connections>
+                                    <action selector="nextTapped:" destination="Ruo-R3-BbJ" eventType="touchUpInside" id="lV4-Q4-itT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tyu-7H-fmh"/>
@@ -214,6 +217,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NJu-yP-bg4"/>
+                    <connections>
+                        <outlet property="correctAnswerLabel" destination="RBw-Qv-6Hu" id="QSG-g9-g0d"/>
+                        <outlet property="questionLabel" destination="hrZ-Ed-zRa" id="GAi-7q-M4n"/>
+                        <outlet property="resultLabel" destination="cf8-eu-C28" id="9tt-x5-qer"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J50-Xm-hbj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -66,7 +66,18 @@ class QuestionViewController: UIViewController {
     
     @IBAction func submitTapped(_ sender: Any) {
         if selectedAnswerIndex == -1 { return }
-        print("User selected answer index: \(selectedAnswerIndex)")
+        performSegue(withIdentifier: "toAnswerSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAnswerSegue" {
+            if let answerVC = segue.destination as? AnswerViewController {
+                answerVC.topic = self.topic
+                answerVC.currentQuestionIndex = self.currentQuestionIndex
+                answerVC.selectedAnswerIndex = self.selectedAnswerIndex
+                answerVC.score = self.score
+            }
+        }
     }
     /*
     // MARK: - Navigation
