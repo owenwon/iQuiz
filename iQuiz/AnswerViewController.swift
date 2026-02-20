@@ -36,21 +36,46 @@ class AnswerViewController: UIViewController {
             resultLabel.text = "Incorrect!"
             resultLabel.textColor = .systemRed
         }
+        
+        let customBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(returnToMainList))
+        self.navigationItem.leftBarButtonItem = customBackButton
 
         // Do any additional setup after loading the view.
     }
     
+    @objc func returnToMainList() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
 
     @IBAction func nextTapped(_ sender: Any) {
+        guard let currentTopic = topic else { return }
+        
+        if currentQuestionIndex + 1 < currentTopic.questions.count {
+            performSegue(withIdentifier: "toNextQuestionSegue", sender: self)
+        } else {
+            performSegue(withIdentifier: "toFinishedSegue", sender: self)
+        }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toNextQuestionSegue" {
+            if let nextQuestionVC = segue.destination as? QuestionViewController {
+                nextQuestionVC.topic = self.topic
+                nextQuestionVC.score = self.score
+                nextQuestionVC.currentQuestionIndex = self.currentQuestionIndex + 1
+            }
+        }
+        
+        
+        if segue.identifier == "toFinishedSegue" {
+            if let finishedVC = segue.destination as? FinishedViewController {
+                finishedVC.topic = self.topic
+                finishedVC.score = self.score
+            }
+        }
+         
     }
-    */
+    
 
 }

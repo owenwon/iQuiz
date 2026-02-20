@@ -26,6 +26,12 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         loadQuestion()
         // Do any additional setup after loading the view.
+        let customBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(returnToMainList))
+        self.navigationItem.leftBarButtonItem = customBackButton
+    }
+    
+    @objc func returnToMainList() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func loadQuestion() {
