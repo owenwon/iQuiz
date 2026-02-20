@@ -39,6 +39,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toQuestionSegue" {
+            if let destinationVC = segue.destination as? QuestionViewController {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    let selectedTopic = QuizRepository.shared.getTopics()[indexPath.row]
+                    destinationVC.topic = selectedTopic
+                }
+            }
+        }
+    }
 
 }
 
