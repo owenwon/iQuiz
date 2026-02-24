@@ -15,39 +15,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let defaultsKey = "savedQuizURL"
     
     @IBAction func settingsTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Settings", message: "Enter URL for quiz data", preferredStyle: .alert)
-        
-        let currentURL = UserDefaults.standard.string(forKey: defaultsKey) ?? defaultURL
-        
-        alert.addTextField { textField in
-            textField.placeholder = "https://..."
-            textField.text = currentURL
-            textField.clearButtonMode = .whileEditing
-        }
-        
-        let checkNowAction = UIAlertAction(title: "Check Now", style: .default) { _ in
-            guard let textField = alert.textFields?.first,
-                  let newURL = textField.text,
-                  !newURL.isEmpty else { return }
-            
-            UserDefaults.standard.set(newURL, forKey: self.defaultsKey)
-            
-            QuizRepository.shared.fetchQuizzes(from: newURL) { success in
-                if success {
-                    print("settings fetch successful")
-                    self.tableView.reloadData()
-                } else {
-                    print("settings fetch failed")
-                    self.showNetworkErrorAlert()
-                }
+        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
             }
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(checkNowAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
     }
     
     func showNetworkErrorAlert() {
