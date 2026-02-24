@@ -66,6 +66,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
         let savedURL = UserDefaults.standard.string(forKey: defaultsKey) ?? defaultURL
         
         QuizRepository.shared.fetchQuizzes(from: savedURL) { success in
@@ -75,6 +79,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             } else {
                 print("Failed to download quizzes. Using fallback data.")
                 self.showNetworkErrorAlert()
+            }
+        }
+    }
+    
+    @objc func handleRefresh() {
+        let savedURL = UserDefaults.standard.string(forKey: defaultsKey) ?? defaultURL
+        
+        QuizRepository.shared.fetchQuizzes(from: savedURL) { success in
+            
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
+                if success {
+                    self.tableView.reloadData()
+                    print("pull to refresh worked")
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showNetworkErrorAlert()
+                    }
+                    
+                }
             }
         }
     }
