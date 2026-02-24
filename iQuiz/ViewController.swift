@@ -11,10 +11,53 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
+    let defaultURL = "http://tednewardsandbox.site44.com/questions.json"
+    let defaultsKey = "savedQuizURL"
+    
     @IBAction func settingsTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Settings", message: "Enter URL for quiz data", preferredStyle: .alert)
+        
+        let currentURL = UserDefaults.standard.string(forKey: defaultsKey) ?? defaultURL
+        
+        alert.addTextField { textField in
+            textField.placeholder = "https://..."
+            textField.text = currentURL
+            textField.clearButtonMode = .whileEditing
+        }
+        
+        let checkNowAction = UIAlertAction(title: "Check Now", style: .default) { _ in
+            guard let textField = alert.textFields?.first,
+                  let newURL = textField.text,
+                  !newURL.isEmpty else { return }
+            
+            UserDefaults.standard.set(newURL, forKey: self.defaultsKey)
+            
+            QuizRepository.shared.fetchQuizzes(from: newURL) { success in
+                if success {
+                    print("settings fetch successful")
+                    self.tableView.reloadData()
+                } else {
+                    print("settings fetch failed")
+                    self.showNetworkErrorAlert()
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(checkNowAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showNetworkErrorAlert() {
+        let alert = UIAlertController(
+            title: "Network error",
+            message: "Unable to download quiz data. Please check internet connection or URL",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -23,14 +66,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
         
-        let url = "http://tednewardsandbox.site44.com/questions.json"
+        let savedURL = UserDefaults.standard.string(forKey: defaultsKey) ?? defaultURL
         
-        QuizRepository.shared.fetchQuizzes(from: url) { success in
+        QuizRepository.shared.fetchQuizzes(from: savedURL) { success in
             if success {
                 print("Successfully downloaded new quizzes!")
                 self.tableView.reloadData()
             } else {
                 print("Failed to download quizzes. Using fallback data.")
+                self.showNetworkErrorAlert()
             }
         }
     }
