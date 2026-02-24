@@ -38,6 +38,36 @@ struct Subject: Codable {
 class QuizRepository {
     static let shared = QuizRepository()
     
+    private let localFileURL: URL = {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return documentsDirectory.appendingPathComponent("localQuizzes.json")
+    }()
+    
+    private func saveToLocalStorage(topicsToSave: [Subject]) {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(topicsToSave)
+            try data.write(to: localFileURL)
+            print("saved quizzes to offline storage")
+        } catch {
+            print("failed to save quizzes to offline storage \(error)")
+        }
+    }
+    
+    private func loadFromLocalStorage() -> Bool {
+        do {
+            let data = try Data(contentsOf: localFileURL)
+            let decoder = JSONDecoder()
+            let savedTopics = try decoder.decode([Subject].self, from: data)
+            self.topics = savedTopics
+            print("successfully loaded quizzes from offline storage")
+            return true
+        } catch {
+            print("failed to load quizzes from offline storage \(error)")
+            return false
+        }
+    }
+    
     var topics: [Subject] = [
         Subject(
             title: "Mathematics",
@@ -70,21 +100,27 @@ class QuizRepository {
     
     func fetchQuizzes(from urlString: String, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: urlString) else {
+            let _ = self.loadFromLocalStorage()
             completion(false)
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
             if let error = error {
                 print("network error: \(error.localizedDescription)")
                 DispatchQueue.main.async {
+                    let _ = self.loadFromLocalStorage( )
                     completion(false)
                 }
                 return
             }
             
             guard let data = data else {
-                DispatchQueue.main.async { completion(false) }
+                DispatchQueue.main.async {
+                    let _ = self.loadFromLocalStorage( )
+                    completion(false)
+                }
                 return
             }
             
@@ -92,13 +128,18 @@ class QuizRepository {
                 let decoder = JSONDecoder()
                 let downloadedTopics = try decoder.decode([Subject].self, from: data)
                 
+                self.saveToLocalStorage(topicsToSave: downloadedTopics)
+                
                 DispatchQueue.main.async {
                     self.topics = downloadedTopics
                     completion(true)
                 }
             } catch {
                 print("JSON decoding error: \(error)")
-                DispatchQueue.main.async { completion(false) }
+                DispatchQueue.main.async {
+                    let _ = self.loadFromLocalStorage()
+                    completion(false)
+                }
             }
         }
         task.resume()

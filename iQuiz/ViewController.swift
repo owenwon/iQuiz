@@ -45,6 +45,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let savedURL = UserDefaults.standard.string(forKey: defaultsKey) ?? defaultURL
         
         QuizRepository.shared.fetchQuizzes(from: savedURL) { success in
+            self.tableView.reloadData()
             if success {
                 print("Successfully downloaded new quizzes!")
                 self.tableView.reloadData()
@@ -62,6 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             DispatchQueue.main.async {
                 self.tableView.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
                 if success {
                     self.tableView.reloadData()
                     print("pull to refresh worked")
