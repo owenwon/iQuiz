@@ -22,6 +22,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let url = "http://tednewardsandbox.site44.com/questions.json"
+        
+        QuizRepository.shared.fetchQuizzes(from: url) { success in
+            if success {
+                print("Successfully downloaded new quizzes!")
+                self.tableView.reloadData()
+            } else {
+                print("Failed to download quizzes. Using fallback data.")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
